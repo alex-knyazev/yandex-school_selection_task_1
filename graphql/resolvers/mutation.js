@@ -39,10 +39,14 @@ module.exports = {
   createEvent(root, { input, usersIds, roomId }, context) {
     return models.Event.create(input)
       .then(event => {
-        event.setRoom(roomId);
-
-        return event.setUsers(usersIds)
-          .then(() => event);
+        let promisesArray = []
+        if(roomId) {
+          event.setRoom(roomId)
+        }
+        if(usersIds && usersIds.length) {
+          event.setUsers(usersIds)
+        }
+        return event;
       });
   },
 
