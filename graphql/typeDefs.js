@@ -8,14 +8,16 @@ type User {
     avatarUrl: String!
 }
 
-input UserInput {
+input UserCreateInput {
     login: String!
-    homeFloor: Int
+    homeFloor: Int,
+    avatarUrl: String!
 }
 
-type UserRoom {
-    id: ID!
-    title: String!
+input UserUpdateInput {
+    login: String
+    homeFloor: Int,
+    avatarUrl: String
 }
 
 type Room {
@@ -25,10 +27,16 @@ type Room {
     floor: Int!
 }
 
-input RoomInput {
+input RoomCreateInput {
     title: String!
     capacity: Int!
     floor: Int!
+}
+
+input RoomUpdateInput {
+    title: String
+    capacity: Int
+    floor: Int
 }
 
 type Event {
@@ -40,10 +48,16 @@ type Event {
     room: Room
 }
 
-input EventInput {
+input EventCreateInput {
     title: String!
     dateStart: Date!
     dateEnd: Date!
+}
+
+input EventUpdateInput {
+    title: String
+    dateStart: Date
+    dateEnd: Date
 }
 
 type Query {
@@ -56,16 +70,16 @@ type Query {
 }
 
 type Mutation {
-  createUser(input: UserInput!): User
-  updateUser(id: ID!, input: UserInput!): User
+  createUser(input: UserCreateInput!): User
+  updateUser(id: ID!, input: UserUpdateInput!): User
   removeUser(id: ID!): User
 
-  createRoom(input: RoomInput!): Room
-  updateRoom(id: ID!, input: RoomInput!): Room
+  createRoom(input: RoomCreateInput!): Room
+  updateRoom(id: ID!, input: RoomUpdateInput!): Room
   removeRoom(id: ID!): Room
 
-  createEvent(input: EventInput!, usersIds: [ID], roomId: ID!): Event
-  updateEvent(id: ID!, input: EventInput!): Event
+  createEvent(input: EventCreateInput!, usersIds: [ID], roomId: ID!): Event
+  updateEvent(id: ID!, input: EventUpdateInput!): Event
   removeUserFromEvent(id: ID!, userId: ID!): Event
   addUserToEvent(id: ID!, userId: ID!): Event
   changeEventRoom(id: ID!, roomId: ID!): Event
