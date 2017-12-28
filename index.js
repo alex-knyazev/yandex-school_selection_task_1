@@ -5,13 +5,14 @@ const bodyParser = require('body-parser');
 
 const pagesRoutes = require('./pages/routes');
 const graphqlRoutes = require('./graphql/routes');
+const { port, staticFolder } = require('./config.js');
 
 const app = express();
 
 app.use(bodyParser.json());
 
 app.use('/', pagesRoutes)
-app.use('/graphgl', graphqlRoutes);
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/graphql', graphqlRoutes);
+app.use(express.static(path.join(__dirname, staticFolder)));
 
-app.listen(3000, () => console.log('Express app listening on localhost:3000'));
+app.listen(port, () => console.log(`Express app listening on localhost:${port}`));
