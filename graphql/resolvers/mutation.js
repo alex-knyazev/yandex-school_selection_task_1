@@ -73,6 +73,7 @@ module.exports = {
     return models.Event.findById(id)
             .then(event => {
               event.setRoom(id);
+              return event;
             });
   },
 
