@@ -36,7 +36,7 @@ function createData () {
       floor: 2
     },
     {
-      title: 'Ствола',
+      title: '2 Ствола',
       capacity: 2,
       floor: 2
     },
